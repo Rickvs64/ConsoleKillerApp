@@ -22,8 +22,8 @@ public class Customer {
     private String city;
     private String country;
 
-    @Column(nullable = false)
-    private String email;
+    @OneToOne(mappedBy = "customer")
+    private Account account;
 
 
     public String getFirstname() {
@@ -42,12 +42,12 @@ public class Customer {
         this.surname = surname;
     }
 
-    public String getEmail() {
-        return email;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
 
@@ -60,14 +60,20 @@ public class Customer {
 
     /**
      * Create a new customer with only essential information.
-     * @param firstname
-     * @param surname
-     * @param email
      */
-    public Customer(String firstname, String surname, String email) {
+    public Customer(String firstname, String surname) {
         this.firstname = firstname;
         this.surname = surname;
-        this.email = email;
+    }
+
+    /**
+     * Create a new customer with only essential information AND an already existing link to an account.
+     * @param firstname
+     */
+    public Customer(String firstname, String surname, Account account) {
+        this.firstname = firstname;
+        this.surname = surname;
+        this.account = account;
     }
 
     /**
@@ -78,15 +84,13 @@ public class Customer {
      * @param address
      * @param city
      * @param country
-     * @param email
      */
-    public Customer(String firstname, String surname, String postcode, String address, String city, String country, String email) {
+    public Customer(String firstname, String surname, String postcode, String address, String city, String country) {
         this.firstname = firstname;
         this.surname = surname;
         this.postcode = postcode;
         this.address = address;
         this.city = city;
         this.country = country;
-        this.email = email;
     }
 }

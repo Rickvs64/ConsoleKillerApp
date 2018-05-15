@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.Domains.Account;
 import com.company.Domains.Customer;
 
 import javax.persistence.*;
@@ -23,12 +24,16 @@ public class Main {
         String firstname = scanner.nextLine();
         show("Great, now please input " + firstname + "'s LAST name:");
         String surname = scanner.nextLine();
-        show("Almost done creating " + firstname + " " + surname + ". Last step; please input this customer's email address:");
+        show("Almost done creating " + firstname + " " + surname + ". Next we'll need this customer's email address:");
         String email = scanner.nextLine();
+        show("Final step. Type in a password:");
+        String password = scanner.nextLine();
 
-        Customer newCustomer = new Customer(firstname, surname, email);
+        Account newAccount = new Account(email, password);
+        Customer newCustomer = new Customer(firstname, surname, newAccount);
+        newAccount.setCustomer(newCustomer);
+
         show(newCustomer.getFirstname() + " " + newCustomer.getSurname() + " has been created!");
-
         show("Now trying to insert this guy into our database.");
 
         try {
@@ -40,6 +45,7 @@ public class Main {
 
             // Sync the new customer with database.
             em.persist(newCustomer);
+            em.persist(newAccount);
 
             // Finally commit changes
             et.commit();
