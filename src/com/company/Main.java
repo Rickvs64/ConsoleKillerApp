@@ -43,6 +43,8 @@ public class Main {
 
             // Finally commit changes
             et.commit();
+
+            show("Success! Customer has been inserted into the database.");
         } catch (Exception ex) {
             throw ex; // Just make it the user's problem.
         } finally {

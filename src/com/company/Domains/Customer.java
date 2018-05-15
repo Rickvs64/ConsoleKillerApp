@@ -8,10 +8,23 @@ import javax.persistence.*;
 @Entity
 public class Customer {
 
-    @Id     @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
 
+    @Column(nullable = false)
     private String firstname;
+    @Column(nullable = false)
+    private String surname;
+
+    private String postcode;
+    private String address;
+    private String city;
+    private String country;
+
+    @Column(nullable = false)
+    private String email;
+
 
     public String getFirstname() {
         return firstname;
@@ -37,13 +50,7 @@ public class Customer {
         this.email = email;
     }
 
-    private String surname;
-    private String postcode;
-    private String address;
-    private String city;
-    private String country;
 
-    private String email;
 
 
     /**
